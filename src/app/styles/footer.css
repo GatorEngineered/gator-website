@@ -1,0 +1,117 @@
+.footer {
+    text-align: center;
+    font-size: 0.9rem;
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    background-color: #f8f8f8;
+    color: #333;
+    position: relative;
+}
+
+/* Gator Icon */
+.gator {
+    display: inline-block;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Chomps Word */
+.chomps {
+    display: inline-block;
+    font-weight: bold;
+    color: #28a745;
+    transition: transform 0.1s ease-in-out;
+}
+
+/* Footer Links */
+.footer-links {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.footer-links button {
+    background: none;
+    border: none;
+    font-size: 0.95rem;
+    cursor: pointer;
+    color: #0077cc;
+    text-decoration: underline;
+}
+
+.footer-links button:hover {
+    color: #0055aa;
+}
+
+/* Popup */
+.footer-popup {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    color: #222;
+    padding: 1.5rem;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    animation: fadeIn 0.3s ease;
+}
+
+.footer-popup-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #888;
+    cursor: pointer;
+}
+
+.footer-popup-close:hover {
+    color: #000;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 50px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+/* Optional dark mode */
+@media (prefers-color-scheme: dark) {
+    .footer {
+        background-color: #111;
+        color: #ccc;
+    }
+
+    .footer-popup {
+        background-color: #222;
+        color: #f1f1f1;
+    }
+
+    .footer-links button {
+        color: #90cdf4;
+    }
+
+    .footer-links button:hover {
+        color: #66aaff;
+    }
+
+    .footer-popup-close {
+        color: #aaa;
+    }
+
+    .footer-popup-close:hover {
+        color: #fff;
+    }
+}

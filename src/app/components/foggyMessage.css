@@ -1,0 +1,153 @@
+.foggy-section {
+  position: relative;
+  background: linear-gradient(to bottom, #0d0d0d 0%, #121212 100%);
+  color: #f0f8ff;
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  padding: 3rem 2rem;
+  text-align: center;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.foggy-section::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to bottom, #0d0d0d, transparent);
+  z-index: 1;
+}
+
+
+.foggy-message-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  backdrop-filter: blur(3px);
+  padding: 2rem;
+  opacity: 0.95;
+}
+
+.foggy-main-text p {
+  margin-bottom: 0.5rem;
+  line-height: 1.9;
+  font-weight: 300;
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.foggy-subline {
+  margin-top: 2.8rem;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #ffffffcc;
+  opacity: 0;
+  animation: fadeInFloat 1.5s ease-out 1.5s forwards, floatLoop 6s ease-in-out 3s infinite;
+}
+
+/* Fades in gently */
+@keyframes fadeInFloat {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loops gently like floating fog */
+@keyframes floatLoop {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (max-width: 480px) {
+  .foggy-section {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem; /* tighter padding for small screens */
+    background-color: #0d0d0d; /* keep it consistent */
+    text-align: center;
+  }
+
+  .foggy-message-content {
+    margin: 0;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .foggy-main-text {
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .foggy-main-text p {
+    padding: 0;
+    margin-bottom: 1rem;
+    line-height: 1.8;
+  }
+
+  .foggy-subline {
+    font-size: 1rem;
+    margin-top: 2rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .foggy-section {
+    padding: 2rem 1.5rem;
+  }
+
+  .foggy-message-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .foggy-main-text p {
+    font-size: 1.3rem;
+  }
+
+  .foggy-subline {
+    font-size: 1.1rem;
+  }
+}
+
+
+/* ==== TABLETS (max-width: 1024px) ==== */
+@media (max-width: 1024px) {
+  .foggy-section {
+    padding: 2.5rem 2rem;
+  }
+
+  .foggy-message-content {
+    max-width: 90%;
+  }
+
+  .foggy-main-text p {
+    font-size: 1.5rem;
+  }
+
+  .foggy-subline {
+    font-size: 1.1rem;
+  }
+}

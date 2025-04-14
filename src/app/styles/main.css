@@ -1,0 +1,46 @@
+/* Unified, clean setup */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: #0d0d0d;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
+}
+
+
+:root {
+    --color-accent: #FF6B35;
+    /* Gator Ember - bold orange-red */
+    --color-accent-hover: #FFD166;
+    /* Sunlight Yellow - hover/secondary action */
+
+    /* Text Colors */
+    --color-text-dark: #E0E0E0;
+    /* Soft white for dark sections */
+    --color-text-light: #1A1A1A;
+    /* Charcoal for light sections */
+    --color-text-muted: #888888;
+    /* For subheadings, labels, etc. */
+
+    /* Secondary Accent */
+    --color-secondary: #118AB2;
+    /* Cool modern blue */
+}
+
+
+.typewriter-section {
+    opacity: 0;
+    visibility: hidden;
+    will-change: opacity, transform;
+}
+
+
+

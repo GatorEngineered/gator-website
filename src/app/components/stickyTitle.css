@@ -1,0 +1,26 @@
+.sticky-title {
+    position: relative;
+    top: 4em;
+    width: 100%;
+    background: transparent;
+    text-align: center;
+    font-size: clamp(2rem, 8vw, 4.8rem);
+    font-weight: bold;
+    padding: 1rem 0;
+    color: 	#E0E0E0;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    z-index: 99;
+    pointer-events: none;
+  }
+  
+  .sticky-title.show {
+    opacity: 1;
+  }
+  
+  @media (max-width: 480px) {
+    .sticky-title {
+      font-size: clamp(2rem, 10vw, 3.5rem);
+    padding: 0.5rem 1rem;
+    }
+  }
