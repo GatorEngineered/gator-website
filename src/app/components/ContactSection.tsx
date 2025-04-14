@@ -23,13 +23,19 @@ export default function ContactSection() {
             phone?: { value: string };
         };
 
+        const start = selectedDate?.toISOString() || '';
+        const end = selectedDate
+            ? new Date(selectedDate.getTime() + 30 * 60 * 1000).toISOString() // adds 30 mins
+            : '';
+
         const formData = {
             name: form.name.value,
             email: form.email?.value || '',
             website: form.website?.value || '',
             message: form.message.value,
             phone: form.phone?.value || '',
-            selectedDate: selectedDate?.toISOString() || '',
+            start,
+            end,
         };
 
         const webhookUrl = 'https://hook.us2.make.com/2hb9avxpgako5jrp2dl5j468f65yp2h3';
@@ -43,7 +49,6 @@ export default function ContactSection() {
                 body: JSON.stringify(formData),
             });
 
-            // ✅ show thank you message
             setSubmitted(true);
         } catch (error) {
             console.error('Submission error:', error);
@@ -53,7 +58,6 @@ export default function ContactSection() {
     return (
         <section className="contact-section">
             <div className="contact-beam" />
-
             <div className="contact-content">
                 {submitted ? (
                     <div className="confirmation-message">
@@ -154,7 +158,6 @@ export default function ContactSection() {
                             <button type="submit">Submit</button>
                         </form>
 
-                        
                         <div className="gator-image">
                             <Image src="/gatorImg.png" alt="Cartoon gator" width={700} height={700} />
                         </div>
