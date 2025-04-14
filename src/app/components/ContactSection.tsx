@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import './contactSection.css';
-import gatorImg from '../../../public/gatorImg.png';
+import Image from 'next/image';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -29,10 +29,8 @@ export default function ContactSection() {
             website: form.website?.value || '',
             message: form.message.value,
             phone: form.phone?.value || '',
-            selectedDate: selectedDate?.toISOString() || '', // ✅ FIX IS HERE
+            selectedDate: selectedDate?.toISOString() || '',
         };
-
-
 
         const webhookUrl = 'https://hook.us2.make.com/2hb9avxpgako5jrp2dl5j468f65yp2h3';
 
@@ -45,19 +43,8 @@ export default function ContactSection() {
                 body: JSON.stringify(formData),
             });
 
-
-            <DatePicker
-                selected={selectedDate}
-                onChange={(date) => setSelectedDate(date)}
-                showTimeSelect
-                timeIntervals={30}
-                minDate={new Date()}
-                maxDate={new Date(new Date().setDate(new Date().getDate() + 10))}
-                dateFormat="MMMM d, yyyy h:mm aa"
-                className="datepicker"
-                placeholderText="Choose a date and time"
-            />
-
+            // ✅ show thank you message
+            setSubmitted(true);
         } catch (error) {
             console.error('Submission error:', error);
         }
@@ -75,7 +62,7 @@ export default function ContactSection() {
                     </div>
                 ) : (
                     <>
-                        <h2>Let's connect to bring a new light to your site?</h2>
+                        <h2>Let&apos;s connect to bring a new light to your site?</h2>
 
                         <form className="contact-form" onSubmit={handleSubmit}>
                             <label>
@@ -108,7 +95,6 @@ export default function ContactSection() {
                                 </div>
                             </div>
 
-
                             {hasWebsite && (
                                 <label>
                                     Website URL
@@ -135,7 +121,6 @@ export default function ContactSection() {
                                     </button>
                                 </div>
                             </div>
-
 
                             {wantsToBook && (
                                 <>
@@ -168,16 +153,14 @@ export default function ContactSection() {
 
                             <button type="submit">Submit</button>
                         </form>
+
+                        
                         <div className="gator-image">
-                <img src="/gatorImg.png" alt="Cartoon gator" width={700} height={700} />
-            </div>
+                            <Image src="/gatorImg.png" alt="Cartoon gator" width={700} height={700} />
+                        </div>
                     </>
                 )}
-
-
             </div>
-
-            
         </section>
     );
 }
