@@ -7,8 +7,6 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export default function ContactSection() {
-    const [hasWebsite, setHasWebsite] = useState(false);
-    const [wantsToBook, setWantsToBook] = useState(false);
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [submitted, setSubmitted] = useState(false);
 
@@ -20,20 +18,23 @@ export default function ContactSection() {
             email: { value: string };
             website?: { value: string };
             message: { value: string };
-            phone?: { value: string };
+            phone: { value: string };
         };
 
-        const start = selectedDate?.toISOString() || '';
-        const end = selectedDate
-            ? new Date(selectedDate.getTime() + 30 * 60 * 1000).toISOString() // adds 30 mins
-            : '';
+        if (!selectedDate) {
+            alert('Please select a booking date and time.');
+            return;
+        }
+
+        const start = selectedDate.toISOString();
+        const end = new Date(selectedDate.getTime() + 60 * 60 * 1000).toISOString(); // 1 hour later
 
         const formData = {
             name: form.name.value,
             email: form.email?.value || '',
             website: form.website?.value || '',
             message: form.message.value,
-            phone: form.phone?.value || '',
+            phone: form.phone.value,
             start,
             end,
         };
@@ -79,76 +80,37 @@ export default function ContactSection() {
                                 <input type="email" name="email" required />
                             </label>
 
-                            <div className="question-group">
-                                <p className="question">Do you have an existing website?</p>
-                                <div className="toggle-buttons">
-                                    <button
-                                        type="button"
-                                        className={hasWebsite ? 'active' : ''}
-                                        onClick={() => setHasWebsite(true)}
-                                    >
-                                        Yes
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className={!hasWebsite ? 'active' : ''}
-                                        onClick={() => setHasWebsite(false)}
-                                    >
-                                        No
-                                    </button>
-                                </div>
-                            </div>
+                            <label>
+                                Website URL (optional)
+                                <input type="url" name="website" placeholder="https://yourwebsite.com" />
+                            </label>
 
-                            {hasWebsite && (
-                                <label>
-                                    Website URL
-                                    <input type="url" name="website" placeholder="https://yourwebsite.com" />
-                                </label>
-                            )}
+                            <label>
+                                Select a date and time (required)
+                                <DatePicker
+                                    selected={selectedDate}
+                                    onChange={(date: Date | null) => setSelectedDate(date)}
+                                    showTimeSelect
+                                    timeIntervals={60}
+                                    minDate={new Date(new Date().setDate(new Date().getDate() + 1))} // Block today
+                                    maxDate={new Date(new Date().setDate(new Date().getDate() + 10))}
+                                    filterTime={(time) => {
+                                        const hour = time.getHours();
+                                        return hour >= 8 && hour < 20;
+                                    }}
+                                    dateFormat="MMMM d, yyyy h:mm aa"
+                                    className="datepicker"
+                                    placeholderText="Choose a date and time"
+                                />
 
-                            <div className="question-group">
-                                <p className="question">Would you like to book a call?</p>
-                                <div className="toggle-buttons">
-                                    <button
-                                        type="button"
-                                        className={wantsToBook ? 'active' : ''}
-                                        onClick={() => setWantsToBook(true)}
-                                    >
-                                        Yes
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className={!wantsToBook ? 'active' : ''}
-                                        onClick={() => setWantsToBook(false)}
-                                    >
-                                        No
-                                    </button>
-                                </div>
-                            </div>
+                            </label>
 
-                            {wantsToBook && (
-                                <>
-                                    <label>
-                                        Select a date and time
-                                        <DatePicker
-                                            selected={selectedDate}
-                                            onChange={(date: Date | null) => setSelectedDate(date)}
-                                            showTimeSelect
-                                            timeIntervals={30}
-                                            minDate={new Date()}
-                                            maxDate={new Date(new Date().setDate(new Date().getDate() + 10))}
-                                            dateFormat="MMMM d, yyyy h:mm aa"
-                                            className="datepicker"
-                                            placeholderText="Choose a date and time"
-                                        />
-                                    </label>
-
-                                    <label>
-                                        Phone Number (optional)
-                                        <input type="tel" name="phone" placeholder="(123) 456-7890" />
-                                    </label>
-                                </>
-                            )}
+                            <label>
+                                Phone Number (required)
+                                <input type="tel" name="phone" placeholder="(123) 456-7890" pattern="\d{10}"
+                                    maxLength={10}
+                                    inputMode="numeric" required />
+                            </label>
 
                             <label>
                                 Message
