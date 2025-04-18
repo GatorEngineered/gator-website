@@ -1,9 +1,10 @@
 import './styles/main.css';
 
 export const metadata = {
-  title: 'Gator Engineered Technologies',
-  description: 'A new wave in web design and blockchain',
+  title: 'Gator Engineered Tech | Advanced AI & Blockchain Websites for Modern Businesses',
+  description: 'Gator Engineered Technologies builds powerful, custom websites for modern businesses worldwide. Unlock the future with AI, blockchain, crypto payments, email marketing, and more — no templates, just bold design and smart tech.',
 };
+
 
 export default function RootLayout({
   children,

@@ -1,5 +1,6 @@
 'use client';
 
+import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import Loader from '@/components/Loader';
@@ -17,7 +18,6 @@ const Footer = dynamic(() => import('@/components/Footer'), { ssr: false });
 const TermsPopup = dynamic(() => import('@/components/TermsPopup'), { ssr: false });
 const CookieConsentPopup = dynamic(() => import('@/components/CookieConsentPopup'), { ssr: false });
 
-
 export default function HomePage() {
   const [loadingComplete, setLoadingComplete] = useState(false);
 
@@ -29,14 +29,45 @@ export default function HomePage() {
 
   return (
     <>
+      <Head>
+        {/* Open Graph Tags */}
+        <meta property="og:title" content="Gator Engineered Tech | Bold, AI-Powered Websites" />
+        <meta
+          property="og:description"
+          content="We build advanced websites using AI, blockchain, crypto & more. No templates. Just future-ready tech."
+        />
+        <meta property="og:image" content="https://gatorengineered.tech/og-image.jpg" />
+        <meta property="og:url" content="https://gatorengineered.tech" />
+        <meta name="twitter:card" content="summary_large_image" />
+
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "Gator Engineered Technologies",
+              "image": "https://gatorengineered.tech/logo.png",
+              "address": {
+                "@type": "PostalAddress",
+                "addressRegion": "FL",
+                "addressCountry": "US"
+              },
+              "url": "https://gatorengineered.tech",
+              "description":
+                "Web design & development company offering advanced, custom websites using blockchain, AI, and crypto for businesses worldwide.",
+            }),
+          }}
+        />
+      </Head>
+
       {/* 1. Loader appears first */}
       {!loadingComplete && <Loader onComplete={() => setLoadingComplete(true)} />}
 
       {/* 2. After loading: sticky title, scroll cue, then lazy-loaded content */}
       {loadingComplete && (
         <>
-
-
           <StickyTitle />
           <ScrollIndicator />
 
@@ -52,21 +83,11 @@ export default function HomePage() {
           {/* 6. Foggy Section (next scene) */}
           <FoggyMessage />
 
-          {/* Spacer to ensure scroll works */}
-        
-
           <ClearingSection />
-
-
           <TabSection />
-
-
           <ContactSection />
-
           <Footer />
-
           <TermsPopup />
-
           <CookieConsentPopup />
         </>
       )}
