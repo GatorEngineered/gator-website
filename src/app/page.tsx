@@ -40,6 +40,9 @@ export default function HomePage() {
         <meta property="og:url" content="https://gatorengineered.tech" />
         <meta name="twitter:card" content="summary_large_image" />
 
+        {/* Favicon */}
+        <link rel="icon" type="image/png" href="/favicon.png.png" />
+
         {/* Structured Data */}
         <script
           type="application/ld+json"
